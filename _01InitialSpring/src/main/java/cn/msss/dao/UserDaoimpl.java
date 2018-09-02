@@ -6,4 +6,10 @@ public class UserDaoimpl implements UserDao {
     public void method() {
         System.out.println("进入Dao");
     }
+
+
+    public UserDaoimpl() {
+        System.out.println("这是UserDaoimpl无参构造");
+    }
+
 }

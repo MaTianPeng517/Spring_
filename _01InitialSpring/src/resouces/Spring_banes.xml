@@ -4,6 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -14,15 +16,98 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!---->
-
-
+    <!--第一阶段-初始Spring-->
     <!--dao配置-->
     <bean id="UserDao" class="cn.msss.dao.UserDaoimpl"></bean>
 
     <!--Service配置-->
     <bean id="UserService" class="cn.msss.service.UserServiceimpl">
         <property name="dao" ref="UserDao"></property>
+    </bean>
+
+    <!--entity配置 <bean id="User" class="cn.msss.entity.User"></bean>-->
+
+
+
+    <!--第二阶段-属性注入+属性赋值+注解方式注入-->
+    <!--根据set配置注入
+    <bean id="User" class="cn.msss.entity.User">
+        <property name="u_id" value="1"></property>
+        <property name="u_Name" value="哈哈"></property>
+    </bean>
+     -->
+
+    <!--P命名空间 xmlns:p="http://www.springframework.org/schema/p"
+    <bean id="User" class="cn.msss.entity.User" p:u_id="2" p:u_Name="嘿嘿"></bean>
+     -->
+
+    <!--根据构造配置注入
+    <bean id="User" class="cn.msss.entity.User">
+        <constructor-arg name="u_id" value="3"></constructor-arg>
+        <constructor-arg name="u_Name" value="呵呵"></constructor-arg>
+    </bean>
+    -->
+
+    <!--C命名空间 xmlns:c="http://www.springframework.org/schema/c"
+    <bean id="User" class="cn.msss.entity.User" c:u_id="4" c:u_Name="嗯嗯"></bean>
+    -->
+
+
+    <!--属性赋值-->
+    <bean id="Aggregate" class="cn.msss.entity.Aggregate">
+        <property name="a_id" value="6"></property>
+        <property name="a_Name" value="测试"></property>
+    </bean>
+
+    <bean id="User" class="cn.msss.entity.User">
+        <property name="u_id" value="5"></property>
+        <property name="u_Name" value="名称"></property>
+        <property name="aggregate" ref="Aggregate"></property><!--域属性-->
+        <!--数组-->
+        <property name="num">
+            <array>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>4</value>
+            </array>
+        </property>
+        <!--List集合-->
+        <property name="list">
+            <list>
+                <value>5</value>
+                <value>6</value>
+                <value>7</value>
+                <value>8</value>
+            </list>
+        </property>
+        <!--Set集合-->
+        <property name="set">
+            <set>
+                <value>嘿嘿</value>
+                <value>呵呵</value>
+                <value>哈哈</value>
+                <value>嘻嘻</value>
+            </set>
+        </property>
+        <!--Map集合-->
+        <property name="mao">
+            <map>
+                <entry key="1" value="小白"></entry>
+                <entry key="2" value="小黑"></entry>
+                <entry key="3" value="小蓝"></entry>
+                <entry key="4" value="小绿"></entry>
+            </map>
+        </property>
+        <!--Properties-->
+        <property name="properties">
+            <props>
+                <prop key="小白">男</prop>
+                <prop key="小黑">女</prop>
+                <prop key="小蓝">男</prop>
+                <prop key="小绿">女</prop>
+            </props>
+        </property>
     </bean>
 
 </beans>
