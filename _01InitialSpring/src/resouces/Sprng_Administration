@@ -17,15 +17,6 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
-
-    <!--注解方式注入
-    <bean id="UserDao" class="cn.msss.dao.UserDaoimpl" autowire="byType"></bean>
-    <bean id="UserService" class="cn.msss.service.UserServiceimpl" autowire="byType"></bean>
-    -->
-    <!--开启扫描注解 -->
-    <context:annotation-config></context:annotation-config>
-
-    <bean id="UserDaoimpl" class="cn.msss.dao.UserDaoimpl"></bean>
-    <bean id="UserServiceimpl" class="cn.msss.service.UserServiceimpl"></bean>
-
+    <import resource="Spring_annotation.xml"/>
+    <import resource="Spring_banes.xml"/>
 </beans>

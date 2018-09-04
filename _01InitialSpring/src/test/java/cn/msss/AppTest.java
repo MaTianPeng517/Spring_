@@ -5,15 +5,12 @@ import static org.junit.Assert.assertTrue;
 import cn.msss.entity.User;
 import cn.msss.service.UserService;
 import cn.msss.service.UserServiceimpl;
-import javafx.application.Application;
 import org.junit.Test;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
-
-import java.applet.AppletContext;
 
 /**
  * Unit test for simple App.
@@ -114,8 +111,20 @@ public class AppTest
      */
     @Test
     public void annotation(){
-        ApplicationContext context=new ClassPathXmlApplicationContext("annotation.xml");
-        UserService bean = context.getBean(UserServiceimpl.class);
-        bean.method();
+        ApplicationContext context=new ClassPathXmlApplicationContext("Sprng_Administration");
+        User bean = context.getBean(User.class);
+        System.out.println(bean);
     }
+
+    /**
+     * 一、管理
+     */
+    @Test
+    public void administration(){
+        ApplicationContext context=new ClassPathXmlApplicationContext("Sprng_Administration");
+        User bean = context.getBean(User.class);
+        System.out.println(bean);
+
+    }
+
 }
