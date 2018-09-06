@@ -7,7 +7,7 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * CGLIB  继承类 实现接口
+ * CGLIB  继承类，也可，实现接口
  * 1.核心类Enhancer
  * 2.核心接口核心接口  MethodInterceptor ，extends Callback
  */
@@ -44,7 +44,7 @@ public class Invocation  implements MethodInterceptor{
 
     public static void main(String [] args){
         Invocation invocation=new Invocation();
-        Describe describe = (Describe) invocation.describe(Books.class);
+        Describes describe = (Describes) invocation.describe(Books.class);
         describe.describe();
     }
 }

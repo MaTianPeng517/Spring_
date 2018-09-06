@@ -1,9 +1,7 @@
 package cn.msss.two;
 
-public class Books implements Describe{
+public class Books extends Describes{
 
-
-    @Override
     public void describe() {
         System.out.printf("蒙拉丽莎的微笑");
     }
