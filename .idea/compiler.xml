@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="_01InitialSpring" />
         <module name="_02SpringJDBC" />
+        <module name="_03SpringProxy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="_01InitialSpring" target="1.7" />
       <module name="_02SpringJDBC" target="1.7" />
+      <module name="_03SpringProxy" target="1.7" />
       <module name="Spring_" target="1.7" />
     </bytecodeTargetLevel>
   </component>
