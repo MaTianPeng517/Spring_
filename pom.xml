@@ -12,6 +12,7 @@
     <module>_01InitialSpring</module>
       <module>_02SpringJDBC</module>
       <module>_03SpringProxy</module>
+    <module>_04SpringInform</module>
   </modules>
 
   <name>Spring</name>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+         <!--
+            1.需要知道给那个目标对象注入增强
+            2.需要配置目标对象
+            3.需要给目标对象注入 增强通知
+         -->
+        <!--dao层注入-->
+        <bean id="UserDaoimpl" class="cn.msss.dao.UserDaoimpl"></bean>
+
+        <!--service层注入-->
+        <bean id="UserServiceimpl" class="cn.msss.service.UserServiceimpl">
+            <property name="dao" ref="UserDaoimpl"></property>
+        </bean>
+
+        <!--配置各种通知++++++-->
+    <!--1.前置通知-->
+        <bean id="Nnotification" class="cn.msss.util.Notification"></bean>
+    <!--2.后置通知-->
+        <bean id="Postposition" class="cn.msss.util.Postposition"></bean>
+    <!--3.环绕通知-->
+        <bean id="Surround" class="cn.msss.util.Surround"></bean>
+    <!--4.异常通知-->
+        <bean id="Abnormal" class="cn.msss.util.Abnormal"></bean>
+
+       <!-- &lt;!&ndash;代理工厂  因为创建代理对象   所以让通知和目标对象产生关系&ndash;&gt;
+        <bean id="ProxyFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+            <property name="targetName" value="UserServiceimpl"></property>
+
+            <property name="interceptorNames">
+                <array>
+                    <value>Nnotification</value>
+                    <value>Postposition</value>
+                    <value>Surround</value>
+                    <value>Abnormal</value>
+                </array>
+            </property>
+
+        </bean>-->
+
+    <!--&lt;!&ndash;顾问配置 第一种方式：使用方法名称&ndash;&gt;
+    <bean id="ProxyFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
+        &lt;!&ndash;设置目标对象&ndash;&gt;
+        <property name="targetName" value="UserServiceimpl"></property>
+        &lt;!&ndash;配置顾问  包含通知&ndash;&gt;
+        <property name="interceptorNames" value="advisor"></property>
+    </bean>
+
+    <bean id="advisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        &lt;!&ndash;设置通知&ndash;&gt;
+        <property name="advice" ref="Nnotification"></property>
+        &lt;!&ndash;
+        指定主业务的执行方法
+        mappedNames:可指定多个
+        mappedName：指定单个
+        &ndash;&gt;
+        <property name="mappedNames">
+            <array>
+                <value>mes</value>     &lt;!&ndash;写入方法名称即可&ndash;&gt;
+            </array>
+        </property>
+    </bean>-->
+
+    <!--&lt;!&ndash;顾问配置 第二种方式：使用正则式匹配多个&ndash;&gt;
+    <bean id="ProxyFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
+        &lt;!&ndash;设置目标对象&ndash;&gt;
+        <property name="targetName" value="UserServiceimpl"></property>
+        &lt;!&ndash;配置顾问  包含通知&ndash;&gt;
+        <property name="interceptorNames" value="advisor"></property>
+    </bean>
+
+    <bean id="advisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        &lt;!&ndash;设置通知&ndash;&gt;
+        <property name="advice" ref="Nnotification"></property>
+        &lt;!&ndash;
+        指定主业务的执行方法
+        patterns:可指定多个
+        pattern：指定单个
+        &ndash;&gt;
+        <property name="patterns">
+            <array>
+                <value>cn.msss.service.UserServiceimpl.*</value>     &lt;!&ndash;写入指定路径即可&ndash;&gt;
+            </array>
+        </property>
+    </bean>
+    -->
+
+
+
+
+    <!--
+    解决问题
+    1.直接使用  service 层
+    2.管理多个  service 层 注入
+    3.管理并可设置多个顾问
+    4.顾问配置管理多个通知
+    -->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+
+        <property name="beanNames">
+            <!--管理多个注入-->
+            <array>
+                <value>UserServiceimpl</value>
+            </array>
+        </property>
+
+        <!--设置顾问-->
+        <property name="interceptorNames">
+            <array>
+                <value>advice</value>
+            </array>
+        </property>
+
+    </bean>
+
+
+    <!--配置顾问-->
+    <bean id="advice" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <!--配置通知-->
+        <property name="advice" ref="Nnotification"></property>
+        <!--配置切入点-->
+        <property name="patterns">
+            <array>
+                <value>cn.msss.service.UserServiceimpl.*</value>
+            </array>
+        </property>
+    </bean>
+</beans>
+
