@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--数据源配置-->
+    <!--加载jdbc.properties-->
+    <context:property-placeholder location="jdbc.properties"></context:property-placeholder>
+    <!--四要素配置  使用的是阿里的-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.userName}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+    <!--层级注入-->
+    <bean id="formoneyDaoimpl" class="cn.msss.dao.FormoneyDaoimpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="poorDaoimpl" class="cn.msss.dao.PoorDaoimpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="repayServiceimpl" class="cn.msss.service.RepayServiceimpl">
+        <property name="fdao" ref="formoneyDaoimpl"></property>
+        <property name="pdao" ref="poorDaoimpl"></property>
+    </bean>
+
+
+   <!-- &lt;!&ndash;配置事务管理 使用xml方式，注解&ndash;&gt;
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    &lt;!&ndash;配置通知
+    name：service中的方法名称
+    propagation：事物的传播行为
+    isolation:事务的隔离级别
+    rollback-for：事务的什么时间点回滚
+    &ndash;&gt;
+    <tx:advice id="interceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="total" propagation="REQUIRED" isolation="DEFAULT" rollback-for="java.lang.RuntimeException"/>
+        </tx:attributes>
+    </tx:advice>
+
+    &lt;!&ndash;配置切入点&ndash;&gt;
+    <aop:config>
+        <aop:pointcut id="point" expression="execution(* *..service.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="point"></aop:advisor>
+    </aop:config>-->
+
+    <!--&lt;!&ndash;注解方式&ndash;&gt;
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
+</beans>

@@ -13,6 +13,8 @@
       <module>_02SpringJDBC</module>
       <module>_03SpringProxy</module>
     <module>_04SpringInform</module>
+      <module>_05SprignAspectJ</module>
+      <module>_06SpringAffair</module>
   </modules>
 
   <name>Spring</name>

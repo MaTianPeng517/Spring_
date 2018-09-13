@@ -39,6 +39,7 @@
     <!--4.异常通知-->
         <bean id="Abnormal" class="cn.msss.util.Abnormal"></bean>
 
+
        <!-- &lt;!&ndash;代理工厂  因为创建代理对象   所以让通知和目标对象产生关系&ndash;&gt;
         <bean id="ProxyFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
 
@@ -78,8 +79,8 @@
         </property>
     </bean>-->
 
-    <!--&lt;!&ndash;顾问配置 第二种方式：使用正则式匹配多个&ndash;&gt;
-    <bean id="ProxyFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <!--顾问配置 第二种方式：使用正则式匹配多个-->
+    <!--<bean id="ProxyFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
         &lt;!&ndash;设置目标对象&ndash;&gt;
         <property name="targetName" value="UserServiceimpl"></property>
         &lt;!&ndash;配置顾问  包含通知&ndash;&gt;
@@ -104,7 +105,6 @@
 
 
 
-
     <!--
     解决问题
     1.直接使用  service 层
@@ -112,16 +112,16 @@
     3.管理并可设置多个顾问
     4.顾问配置管理多个通知
     -->
-    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    <!--<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
 
         <property name="beanNames">
-            <!--管理多个注入-->
+            &lt;!&ndash;管理多个注入&ndash;&gt;
             <array>
                 <value>UserServiceimpl</value>
             </array>
         </property>
 
-        <!--设置顾问-->
+        &lt;!&ndash;设置顾问&ndash;&gt;
         <property name="interceptorNames">
             <array>
                 <value>advice</value>
@@ -131,16 +131,16 @@
     </bean>
 
 
-    <!--配置顾问-->
+    &lt;!&ndash;配置顾问&ndash;&gt;
     <bean id="advice" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
-        <!--配置通知-->
+        &lt;!&ndash;配置通知&ndash;&gt;
         <property name="advice" ref="Nnotification"></property>
-        <!--配置切入点-->
+        &lt;!&ndash;配置切入点&ndash;&gt;
         <property name="patterns">
             <array>
                 <value>cn.msss.service.UserServiceimpl.*</value>
             </array>
         </property>
-    </bean>
+    </bean>-->
 </beans>
 

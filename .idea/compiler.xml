@@ -10,6 +10,8 @@
         <module name="_02SpringJDBC" />
         <module name="_03SpringProxy" />
         <module name="_04SpringInform" />
+        <module name="_05SprignAspectJ" />
+        <module name="_06SpringAffair" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -18,6 +20,8 @@
       <module name="_03SpringProxy" target="1.7" />
       <module name="_04SpringInform" target="1.7" />
       <module name="_04SpringNotice" target="1.7" />
+      <module name="_05SprignAspectJ" target="1.7" />
+      <module name="_06SpringAffair" target="1.7" />
       <module name="Spring_" target="1.7" />
     </bytecodeTargetLevel>
   </component>

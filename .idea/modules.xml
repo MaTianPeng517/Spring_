@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/_02SpringJDBC/_02SpringJDBC.iml" filepath="$PROJECT_DIR$/_02SpringJDBC/_02SpringJDBC.iml" />
       <module fileurl="file://$PROJECT_DIR$/_03SpringProxy/_03SpringProxy.iml" filepath="$PROJECT_DIR$/_03SpringProxy/_03SpringProxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/_04SpringInform/_04SpringInform.iml" filepath="$PROJECT_DIR$/_04SpringInform/_04SpringInform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_05SprignAspectJ/_05SprignAspectJ.iml" filepath="$PROJECT_DIR$/_05SprignAspectJ/_05SprignAspectJ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_06SpringAffair/_06SpringAffair.iml" filepath="$PROJECT_DIR$/_06SpringAffair/_06SpringAffair.iml" />
     </modules>
   </component>
 </project>
